@@ -1,5 +1,4 @@
 <?php
-    include('includes/nav.php');
     $posts = json_decode(file_get_contents("data/posts.json"), true);
 ?>
 <!DOCTYPE html>
@@ -7,8 +6,11 @@
 <head>
     <title>Talakay</title>
     <link rel="stylesheet" href="assets/style.css">
+    
 </head>
 <body>
+
+<?php include('includes/nav.php'); ?>
 
 <div class="page-content">
 
@@ -60,11 +62,12 @@
 
         </div>
         <!-- Add more cards as needed -->
+        </div>
+        <!-- Add more cards as needed -->
     </div>
 </div>
 <?php
     include('includes/footer.php');
 ?>
-</body>
 </body>
 </html>

@@ -149,6 +149,9 @@ body {
 /* let the main container grow to push the footer down */
 .container {
     flex: 1 0 auto;
+    display: flex;
+    margin: 20px;
+    gap: 20px;
 }
 
 /* footer stuck to the bottom of the panel/page */
@@ -175,10 +178,6 @@ body {
 }
 
 /* MAIN LAYOUT */
-.container {
-    display: flex;
-    margin: 20px;
-}
 
 /* SIDEBAR */
 .sidebar {
@@ -216,6 +215,9 @@ body {
 .main-content {
     width: 100%;
     padding: 20px 40px;
+    /* allow the main content area to scroll if content grows,
+       while the footer stays pinned to the bottom of the page */
+    overflow: auto;
 }
 
 .discussion-grid {
