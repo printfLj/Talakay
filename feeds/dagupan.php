@@ -1,14 +1,16 @@
 <?php
-    include('includes/nav.php');
+    require_once '../includes/init.php';
     $posts = json_decode(file_get_contents("data/posts.json"), true);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Dagupan</title>
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+
+<?php include('../includes/nav.php'); ?>
 
 <div class="page-content">
 
@@ -23,9 +25,9 @@
         <div class="sidebar">
             <h3>Communities</h3>
             <ul>
-                <a href="feeds/dagupan.php">Dagupan City</a>
+                <li><a href="dagupan.php">Dagupan City</a></li>
                 <li>Lingayen</li>
-                <li>Binmaley</li>
+                <li><a href="binmaley.php">Binmaley</a></li>
                 <li>San Fabian</li>
                 <li>Calasiao</li>
             </ul>
@@ -50,15 +52,15 @@
                             <button>❤️ Support</button>
                             <button>⚠️ Needs Attention</button>
                         </div>
-                    </div>
                 </div>
+            <?php endforeach; ?>
         </div>
-        <?php endforeach; ?>
+        <!-- Add more cards as needed -->
     </div>
 
 </div>
 <?php
-    include('includes/footer.php');
+    include('../includes/footer.php');
 ?>
 </body>
 </html>

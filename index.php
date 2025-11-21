@@ -1,7 +1,7 @@
 <?php 
-    include ("includes/nav.php");
+    require_once 'includes/init.php';
 
-    // `includes/nav.php` handles session_start(); make the homepage public
+    // make the homepage public; read session user if present
     $user = null;
     if (isset($_SESSION['user'])) {
         $user = $_SESSION["user"];
@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+
+<?php include('includes/nav.php'); ?>
 
 <!-- HERO SECTION -->
 <section class="hero">

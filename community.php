@@ -1,4 +1,5 @@
 <?php
+    require_once 'includes/init.php';
     $posts = json_decode(file_get_contents("data/posts.json"), true);
 ?>
 <!DOCTYPE html>
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="assets/style.css">
     
 </head>
+
 <body>
 
 <?php include('includes/nav.php'); ?>
@@ -27,7 +29,7 @@
             <ul>
                 <li><a href="feeds/dagupan.php">Dagupan City</a></li>
                 <li>Lingayen</li>
-                <li>Binmaley</li>
+                <li><a href="feeds/binmaley.php">Binmaley</a></li>
                 <li>San Fabian</li>
                 <li>Calasiao</li>
             </ul>

@@ -1,16 +1,12 @@
 <?php
-    include('includes/nav.php');
+require_once 'includes/init.php';
 
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+    exit;
+}
 
-    if (!isset($_SESSION['user'])) {
-        header('Location: login.php');
-        exit;
-    }
-
-    $user = $_SESSION['user'];
+$user = $_SESSION['user'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +17,9 @@
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+
+<?php include('includes/nav.php'); ?>
+
     <main class="profile-page">
         <section class="profile-card">
             <h2>Welcome, <?= htmlspecialchars($user['name'] ?? 'User') ?></h2>

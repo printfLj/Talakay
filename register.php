@@ -1,6 +1,6 @@
 <?php
 
-include('includes/nav.php');
+require_once 'includes/init.php';
 
 require "User.php";
 $user = new User();
@@ -29,8 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REGISTER</title>
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+
+<?php include('includes/nav.php'); ?>
     <h2>REGISTER HERE!</h2>
     <p><?= $message ?></p>
 
