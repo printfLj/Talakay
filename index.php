@@ -1,5 +1,11 @@
 <?php 
     include ("includes/nav.php");
+
+    // `includes/nav.php` handles session_start(); make the homepage public
+    $user = null;
+    if (isset($_SESSION['user'])) {
+        $user = $_SESSION["user"];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

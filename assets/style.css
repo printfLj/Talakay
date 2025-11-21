@@ -26,10 +26,32 @@ body {
     font-weight: bold;
 }
 
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
 .nav-links a {
-    margin-left: 30px;
+    margin-left: 0;
     text-decoration: none;
     color: #333;
+    font-weight: 600;
+}
+
+.profile-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-name {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #f0f0f0;
+    border-radius: 6px;
+    color: #333;
+    text-decoration: none;
     font-weight: 600;
 }
 
@@ -114,12 +136,29 @@ body {
 }
 
 /* FOOTER */
+/* ensure the page is a column so the footer can sit at the bottom */
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* let the main container grow to push the footer down */
+.container {
+    flex: 1 0 auto;
+}
+
+/* footer stuck to the bottom of the panel/page */
 .footer {
     background: #333;
     color: white;
     text-align: center;
     padding: 25px;
     margin-top: auto;
+    width: 100%;
 }
 
 .community-hero {
@@ -266,4 +305,15 @@ body {
 
 .post-footer button:hover {
     opacity: 0.9;
+}
+
+.login-title {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    position: relative;
+    top: 50vh;
+    transform: translateY(-50%);
+    width: 100%;
+
 }
