@@ -4,5 +4,11 @@
         "email": "lj@gmail.com",
         "password": "$2y$12$yAlccV1J7WwQssZBDcRyc.P\/Exci7uo3YVohUMO6W5c8PFm2i.zgS",
         "created_at": "2025-11-21 13:09:03"
+    },
+    {
+        "name": "lj",
+        "email": "Lj@gmail.com",
+        "password": "$2y$12$HuvPkmZK\/GmE9xL9di.9uen8wYlP9DOGXRdCz09bJiMyVrlAZ3qCC",
+        "created_at": "2025-12-08 13:22:08"
     }
 ]

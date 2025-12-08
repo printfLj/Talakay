@@ -1,6 +1,10 @@
 <?php
     require_once '../includes/init.php';
-    $posts = json_decode(file_get_contents("data/posts.json"), true);
+    require_once '../models/PostRepository.php';
+    $repo = new PostRepository();
+    $posts = array_filter($repo->all(), function ($post) {
+        return stripos($post['location'] ?? '', 'Dagupan') !== false;
+    });
 ?>
 <!DOCTYPE html>
 <html>
