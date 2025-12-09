@@ -1,19 +1,27 @@
 {
-    "lj@gmail.com::maria@example.com": [
-        {
-            "id": "msg_sample",
-            "from": "maria@example.com",
-            "to": "lj@gmail.com",
-            "body": "Hi LJ, are you joining the clean-up this weekend?",
-            "created_at": "2025-01-07 12:10:00"
-        }
-    ],
     "Lj@gmail.com::lj@gmail.com": [
         {
-            "id": "msg_381c2448",
+            "id": "msg_873523a5",
+            "from": "Lj@gmail.com",
+            "to": "lj@gmail.com",
+            "body": "yo!",
+            "created_at": "2025-12-09 11:08:56"
+        },
+        {
+            "id": "msg_3782027e",
             "from": "lj@gmail.com",
             "to": "Lj@gmail.com",
-            "body": "yo!",
-            "created_at": "2025-12-08 13:21:40"
+            "body": "gurt",
+            "created_at": "2025-12-09 15:42:43"
+        }
+    ],
+    "Lj@gmail.com::lance@gmail.com": [
+        {
+            "id": "msg_5e8f0133",
+            "from": "Lj@gmail.com",
+            "to": "lance@gmail.com",
+            "body": "yo",
+            "created_at": "2025-12-09 15:45:19"
         }
     ]
+}

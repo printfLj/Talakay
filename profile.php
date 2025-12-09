@@ -46,67 +46,98 @@ $conversation = $activeFriend ? $graph->getConversation($user['email'], $activeF
 
 <?php include('includes/nav.php'); ?>
 
-<main class="profile-page">
-    <section class="profile-card">
-        <h2>Welcome, <?= htmlspecialchars($user['name'] ?? 'User') ?></h2>
-        <p><strong>Email:</strong> <?= htmlspecialchars($user['email'] ?? '') ?></p>
-        <?php if (!empty($user['created_at'])): ?>
-            <p><strong>Member since:</strong> <?= htmlspecialchars($user['created_at']) ?></p>
-        <?php endif; ?>
-        <a class="btn" href="logout.php">Logout</a>
-    </section>
-
-    <section class="profile-card">
-        <h3>Friends</h3>
-        <?php if ($message): ?>
-            <p class="status"><?= htmlspecialchars($message) ?></p>
-        <?php endif; ?>
-        <form method="post" class="stack-form">
-            <input type="hidden" name="action" value="add_friend">
-            <input type="email" name="friend_email" placeholder="Neighbor's email" required>
-            <button type="submit">Add Friend</button>
-        </form>
-        <div class="friend-list">
-            <?php if (empty($friends)): ?>
-                <p class="muted">No friends yet. Add someone using their email.</p>
+<div class="profile-page">
+    <!-- HEADER -->
+    <div class="profile-header">
+        <div class="profile-info">
+            <h1>Welcome, <?= htmlspecialchars($user['name'] ?? 'User') ?></h1>
+            <p class="profile-email">📧 <?= htmlspecialchars($user['email'] ?? '') ?></p>
+            <?php if (!empty($user['created_at'])): ?>
+                <p class="profile-meta">Member since <?= htmlspecialchars($user['created_at']) ?></p>
             <?php endif; ?>
-            <?php foreach ($friends as $f): ?>
-                <a class="friend-pill <?= $activeFriend === $f ? 'active' : '' ?>" href="profile.php?friend=<?= urlencode($f) ?>">
-                    <?= htmlspecialchars($f) ?>
-                </a>
-            <?php endforeach; ?>
         </div>
-    </section>
+        <a class="btn logout-btn" href="logout.php">Logout</a>
+    </div>
 
-    <section class="profile-card">
-        <h3>Messages</h3>
-        <?php if (!$activeFriend): ?>
-            <p class="muted">Add a friend to start a conversation.</p>
-        <?php else: ?>
-            <div class="conversation">
-                <?php if (empty($conversation)): ?>
-                    <p class="muted">No messages yet.</p>
-                <?php else: ?>
-                    <?php foreach ($conversation as $msg): ?>
-                        <div class="message <?= $msg['from'] === $user['email'] ? 'from-me' : 'from-them' ?>">
-                            <div class="meta">
-                                <span><?= htmlspecialchars($msg['from']) ?></span>
-                                <span><?= htmlspecialchars($msg['created_at'] ?? '') ?></span>
-                            </div>
-                            <p><?= nl2br(htmlspecialchars($msg['body'] ?? '')) ?></p>
-                        </div>
-                    <?php endforeach; ?>
+    <!-- MAIN CONTENT -->
+    <div class="profile-container">
+        <!-- LEFT SIDEBAR: FRIENDS -->
+        <aside class="friends-sidebar">
+            <div class="sidebar-card">
+                <h3>Your Friends</h3>
+                <?php if ($message): ?>
+                    <div class="alert <?= strpos($message, 'could not') !== false ? 'alert-error' : 'alert-success' ?>">
+                        <?= htmlspecialchars($message) ?>
+                    </div>
                 <?php endif; ?>
+                <form method="post" class="add-friend-form">
+                    <input type="hidden" name="action" value="add_friend">
+                    <div class="form-group">
+                        <input type="email" name="friend_email" placeholder="Enter neighbor's email" required>
+                        <button type="submit" class="btn-small">+ Add Friend</button>
+                    </div>
+                </form>
+                <div class="friends-section">
+                    <?php if (empty($friends)): ?>
+                        <p class="muted">No friends yet. Add someone using their email to start messaging.</p>
+                    <?php else: ?>
+                        <ul class="friends-list">
+                            <?php foreach ($friends as $f): ?>
+                                <li>
+                                    <a class="friend-item <?= $activeFriend === $f ? 'active' : '' ?>" href="profile.php?friend=<?= urlencode($f) ?>">
+                                        <span class="friend-icon">👤</span>
+                                        <span class="friend-email"><?= htmlspecialchars($f) ?></span>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                </div>
             </div>
-            <form method="post" class="stack-form">
-                <input type="hidden" name="action" value="send_message">
-                <input type="hidden" name="to" value="<?= htmlspecialchars($activeFriend) ?>">
-                <textarea name="body" placeholder="Send a message" required></textarea>
-                <button type="submit">Send</button>
-            </form>
-        <?php endif; ?>
-    </section>
-</main>
+        </aside>
+
+        <!-- RIGHT MAIN: MESSAGES -->
+        <section class="messages-main">
+            <?php if (!$activeFriend): ?>
+                <div class="empty-chat">
+                    <p class="empty-icon">💬</p>
+                    <h3>No conversation selected</h3>
+                    <p>Add a friend or select one from the list to start messaging.</p>
+                </div>
+            <?php else: ?>
+                <div class="chat-header">
+                    <h3>Chat with <?= htmlspecialchars($activeFriend) ?></h3>
+                </div>
+                <div class="chat-area">
+                    <div class="conversation">
+                        <?php if (empty($conversation)): ?>
+                            <div class="conversation-empty">
+                                <p>👋 Say hello! Start a conversation.</p>
+                            </div>
+                        <?php else: ?>
+                            <?php foreach ($conversation as $msg): ?>
+                                <div class="message-bubble <?= $msg['from'] === $user['email'] ? 'from-me' : 'from-them' ?>">
+                                    <div class="message-content">
+                                        <p><?= nl2br(htmlspecialchars($msg['body'] ?? '')) ?></p>
+                                    </div>
+                                    <div class="message-time"><?= htmlspecialchars($msg['created_at'] ?? '') ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <form method="post" class="message-form">
+                    <input type="hidden" name="action" value="send_message">
+                    <input type="hidden" name="to" value="<?= htmlspecialchars($activeFriend) ?>">
+                    <div class="message-input-group">
+                        <textarea name="body" placeholder="Type your message..." required></textarea>
+                        <button type="submit" class="btn-send">Send</button>
+                    </div>
+                </form>
+            <?php endif; ?>
+        </section>
+    </div>
+</div>
 
 <?php include('includes/footer.php'); ?>
 </body>
