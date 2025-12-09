@@ -1,17 +1,18 @@
 {
+    "Lj@gmail.com": {
+        "friends": [
+            "lj@gmail.com",
+            "lance@gmail.com"
+        ]
+    },
     "lj@gmail.com": {
         "friends": [
-            "maria@example.com",
             "Lj@gmail.com"
         ]
     },
-    "maria@example.com": {
+    "lance@gmail.com": {
         "friends": [
-            "lj@gmail.com"
-        ]
-    },
-    "Lj@gmail.com": {
-        "friends": [
-            "lj@gmail.com"
+            "Lj@gmail.com"
         ]
     }
+}

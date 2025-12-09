@@ -24,7 +24,6 @@
     <div class="hero-text-panel">
         <h1>Engage With Your Community</h1>
         <p>Join discussions, share insights, and help improve communities across Pangasinan.</p>
-        <a href="community.php" class="cta-btn">Visit Community Hubs</a>
     </div>
 </section>
 
@@ -32,6 +31,9 @@
 <section class="info-panel">
     <h2>Visit our Community and Discussion Hubs</h2>
     <p>A space to find updates, opportunities, local concerns, and community-driven projects.</p>
+    <div class="cta-btn">
+        <a href="community.php">Click here</a>
+    </div>
 </section>
 
 <!-- CARD GRID -->
@@ -67,7 +69,7 @@
         <div class="card-media" style="background-image:url('assets/Pangasinan.jpg');"></div>
         <div class="card-body">
             <h3>Community Projects</h3>
-            <p>Barangay projects and volunteer drives—see what’s underway and where help is needed.</p>
+            <p>Barangay projects and volunteer drives—see what's underway and where help is needed.</p>
             <a href="community.php">See updates →</a>
         </div>
     </article>
@@ -75,9 +77,9 @@
     <article class="card1">
         <div class="card-media" style="background-image:url('assets/Talakay_Logo.png');"></div>
         <div class="card-body">
-            <h3>Topics</h3>
+            <h3>Topics & Discover</h3>
             <p>Browse curated topics like traffic, pets, and environment to jump into focused discussions.</p>
-            <a href="topics.php">View topics →</a>
+            <a href="community.php?tab=topics">View topics →</a>
         </div>
     </article>
 

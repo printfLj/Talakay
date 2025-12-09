@@ -49,7 +49,7 @@
                     <button type="submit">Login</button>
                 </form>
 
-                <p>Don't have an Account? <a href="register.php">Register here.</a></p>
+                <p class="login-margin">Don't have an Account? <a href="register.php">Register here.</a></p>
             </div>
         </div>
     </section>
