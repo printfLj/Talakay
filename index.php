@@ -38,66 +38,78 @@
 
     <!-- CARD GRID -->
     <section class="cards">
-        <article class="card">
-            <div class="card-media" style="background-image:url('assets/animal_hub.jpg');"></div>
-            <div class="card-body">
-                <h3>Animal Hub</h3>
-                <p>Keep up-to-date with lost and found pets, adoption leads, and vet resources across Pangasinan.</p>
-                <a href="rooms/pets.php">Enter room →</a>
-            </div>
-        </article>
+        <a href="rooms/pets.php" class="card-link">
+            <article class="card">
+                <div class="card-media" style="background-image:url('assets/animal_hub.jpg');"></div>
+                <div class="card-body">
+                    <h3>Stray Pets</h3>
+                    <p>Keep up-to-date with lost and found pets, adoption leads, and vet resources across Pangasinan.</p>
+                    <span class="card-action">Enter room →</span>
+                </div>
+            </article>
+        </a>
 
-        <article class="card">
-            <div class="card-media" style="background-image:url('assets/environment.jpg');"></div>
-            <div class="card-body">
-                <h3>Environment Hub</h3>
-                <p>Track cleanups, waste collection, and local climate efforts. Join neighbors making streets cleaner.</p>
-                <a href="rooms/environment.php">Enter room →</a>
-            </div>
-        </article>
+        <a href="rooms/environment.php" class="card-link">
+            <article class="card">
+                <div class="card-media" style="background-image:url('assets/environment.jpg');"></div>
+                <div class="card-body">
+                    <h3>Environment</h3>
+                    <p>Track cleanups, waste collection, and local climate efforts. Join neighbors making streets cleaner.</p>
+                    <span class="card-action">Enter room →</span>
+                </div>
+            </article>
+        </a>
 
-        <article class="card">
-            <div class="card-media" style="background-image:url('assets/traffic.jfif');"></div>
-            <div class="card-body">
-                <h3>Traffic & Roads</h3>
-                <p>Road work, drainage fixes, and jeepney reroutes. Share updates before you head out.</p>
-                <a href="rooms/traffic.php">Enter room →</a>
-            </div>
-        </article>
+        <a href="rooms/traffic.php" class="card-link">
+            <article class="card">
+                <div class="card-media" style="background-image:url('assets/traffic.jfif');"></div>
+                <div class="card-body">
+                    <h3>Traffic & Roads</h3>
+                    <p>Road work, drainage fixes, and jeepney reroutes. Share updates before you head out.</p>
+                    <span class="card-action">Enter room →</span>
+                </div>
+            </article>
+        </a>
 
-        <article class="card1">
-            <div class="card-media" style="background-image:url('assets/Pangasinan.jpg');"></div>
-            <div class="card-body">
-                <h3>Community Projects</h3>
-                <p>Barangay projects and volunteer drives—see what's underway and where help is needed.</p>
-                <a href="community.php">See updates →</a>
-            </div>
-        </article>
+        <a href="rooms/public_safety.php" class="card-link">
+            <article class="card1">
+                <div class="card-media" style="background-image:url('/assets/Dagupan_lighting.jpg');"></div>
+                <div class="card-body">
+                    <h3>Public Safety</h3>
+                    <p>Stay informed on local safety alerts, fire incidents, and emergency tips. Help keep your neighborhood prepared.</p>
+                    <span class="card-action">See updates →</span>
+                </div>
+            </article>
+        </a>
 
-        <article class="card1">
-            <div class="card-media" style="background-image:url('assets/Talakay_Logo.png');"></div>
-            <div class="card-body">
-                <h3>Topics & Discover</h3>
-                <p>Browse curated topics like traffic, pets, and environment to jump into focused discussions.</p>
-                <a href="community.php?tab=topics">View topics →</a>
-            </div>
-        </article>
+        <a href="rooms/local_businesses.php?tab=topics" class="card-link">
+            <article class="card1">
+                <div class="card-media" style="background-image:url('/assets/Lingayen_bazaar.jpg');"></div>
+                <div class="card-body">
+                    <h3>Local Businesses</h3>
+                    <p>Updates on new shops, market days, and service recommendations. Support Pangasinan’s growing business community.</p>
+                    <span class="card-action">View topics →</span>
+                </div>
+            </article>
+        </a>
 
-        <article class="card1">
-            <div class="card-media" style="background-image:url('assets/animal_hub.jpg');"></div>
-            <div class="card-body">
-                <h3>Meet Neighbors</h3>
-                <p>Add friends, swap messages, and coordinate with people near you about local concerns.</p>
-                <a href="profile.php">Go to profile →</a>
-            </div>
-        </article>
+        <a href="rooms/health.php" class="card-link">
+            <article class="card1">
+                <div class="card-media" style="background-image:url('/assets/Calasiao_lighting.jpg');"></div>
+                <div class="card-body">
+                    <h3>Health & Wellness</h3>
+                    <p>Get updates on medical missions, vaccination schedules, and local health resources for families.</p>
+                    <span class="card-action">Go to profile →</span>
+                </div>
+            </article>
+        </a>
     </section>
 
     <section class="panel-below-cards">
-        <h2>Discover our Major Projects</h2>
-        <p>Learn more about our capital works and asset management projects happening throughout the year.</p>
+        <h2>Discover What’s Popular Today</h2>
+        <p>Stay updated on trending community posts, hot topics, and the most active discussions happening right now.</p>
         <div class="cta-btn">
-            <a href="major_projects.php">Click here</a>
+            <a href="popular_today.php">Click here</a>
         </div>
     </section>
 
@@ -106,7 +118,7 @@
         <article class="card">
             <div class="card-media" style="background-image:url('assets/animal_hub.jpg');"></div>
             <div class="card-body">
-                <h3>Animal Hub</h3>
+                <h3>Stray Pets</h3>
                 <p>Keep up-to-date with lost and found pets, adoption leads, and vet resources across Pangasinan.</p>
                 <a href="rooms/pets.php">Enter room →</a>
             </div>
@@ -115,7 +127,7 @@
         <article class="card">
             <div class="card-media" style="background-image:url('assets/environment.jpg');"></div>
             <div class="card-body">
-                <h3>Environment Hub</h3>
+                <h3>Environment</h3>
                 <p>Track cleanups, waste collection, and local climate efforts. Join neighbors making streets cleaner.</p>
                 <a href="rooms/environment.php">Enter room →</a>
             </div>

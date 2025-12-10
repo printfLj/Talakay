@@ -25,7 +25,7 @@ $latest = array_slice($all, 0, 12);
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Major Projects — Pangasinan News</title>
+    <title>Popular Today</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
