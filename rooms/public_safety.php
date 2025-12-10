@@ -4,7 +4,7 @@ require_once '../models/PostRepository.php';
 
 $repo = new PostRepository();
 $user = $_SESSION['user'] ?? null;
-$topic = 'traffic';
+$topic = 'public_safety';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'create_post') {
     $title = trim($_POST['title'] ?? '');
@@ -22,20 +22,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'creat
             'tags' => $tags,
             'location' => $location,
         ]);
-        header('Location: traffic.php');
+                header('Location: public_safety.php');
         exit;
     }
 }
 
 $posts = $repo->search(null, null, $topic);
-$topicLabel = 'Traffic & Roads';
+$topicLabel = 'Public Safety';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traffic & Roads</title>
+    <title>Public Safety</title>
     <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -47,8 +47,8 @@ $topicLabel = 'Traffic & Roads';
     <div class="feed-header">
         <div class="feed-header-content">
             <div class="feed-branding">
-                <img src="../assets/traffic_pfp.jfif" alt="Traffic logo" class="feed-logo">
-                <h1>t/Traffic & Roads</h1>
+                <img src="../assets/public_safety_pfp.jfif" alt="Traffic logo" class="feed-logo">
+                <h1>t/Public Safety</h1>
             </div>
             <div class="feed-actions">
                 <button class="feed-btn feed-btn-primary">+ Create Post</button>

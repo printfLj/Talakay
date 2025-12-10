@@ -99,6 +99,9 @@ $topics = [
     'traffic' => 'Traffic & Roads',
     'pets' => 'Stray Pets & Adoption',
     'environment' => 'Environment & Cleanups',
+    'public_safety' => 'Public Safety',
+    'local_businesses' => 'Local Businesses',
+    'health' => 'Health & Wellness',
 ];
 
 function render_replies(array $replies, ?string $parentId = null): void
@@ -202,9 +205,17 @@ function render_replies(array $replies, ?string $parentId = null): void
                         <span class="icon">🌱</span>
                         <span class="label">Environment</span>
                     </a>
-                    <a href="?tab=topics" class="community-item">
-                        <span class="icon">📋</span>
-                        <span class="label">All Topics</span>
+                    <a href="rooms/public_safety.php" class="community-item">
+                        <span class="icon">🦺</span>
+                        <span class="label">Public Safety</span>
+                    </a>
+                    <a href="rooms/local_businesses.php" class="community-item">
+                        <span class="icon">🛒</span>
+                        <span class="label">Local Businesses</span>
+                    </a>
+                    <a href="rooms/health.php" class="community-item">
+                        <span class="icon">❤️‍🩹</span>
+                        <span class="label">Health & Wellness</span>
                     </a>
                 </div>
             </div>

@@ -283,6 +283,14 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover,
+    .card1:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 50px rgba(0,0,0,0.5);
     }
 
     .card-media {
@@ -290,6 +298,12 @@
         padding-top: 56%;
         background-size: cover;
         background-position: center;
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover .card-media,
+    .card1:hover .card-media {
+        transform: scale(1.1);
     }
 
     .card-body {
@@ -310,7 +324,13 @@
         margin: 0;
     }
 
-    .card a {
+    .card-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+
+    .card-action {
         display: inline-block;
         margin-top: 10px;
         color: #38bdf8;
@@ -1548,4 +1568,321 @@
         text-decoration: none;
         color: #1e3a8a;
         font-weight: 600;
+    }
+
+    /* FEED PAGE STYLES */
+    .feed-container {
+        background: #0d1628;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .feed-header {
+        background: #1a202c;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        padding: 20px;
+        sticky: top;
+        position: relative;
+    }
+
+    .feed-header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .feed-branding {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .feed-logo {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .feed-branding h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #f1f5f9;
+        margin: 0;
+    }
+
+    .feed-actions {
+        display: flex;
+        gap: 12px;
+    }
+
+    .feed-btn {
+        padding: 8px 16px;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        background: transparent;
+        color: #e2e8f0;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .feed-btn:hover {
+        background: rgba(148, 163, 184, 0.1);
+    }
+
+    .feed-btn-primary {
+        background: #0ea5e9;
+        color: #0b1220;
+        border-color: #0ea5e9;
+    }
+
+    .feed-btn-primary:hover {
+        background: #38bdf8;
+    }
+
+    /* Reddit-like container */
+    .reddit-container {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .reddit-feed {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .reddit-post {
+        display: flex;
+        gap: 12px;
+        background: #111827;
+        border: 1px solid rgba(148, 163, 184, 0.12);
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 16px;
+        transition: border-color 0.2s;
+    }
+
+    .reddit-post:hover {
+        border-color: rgba(148, 163, 184, 0.25);
+    }
+
+    .post-vote-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 40px;
+        flex-shrink: 0;
+    }
+
+    .vote-btn {
+        background: none;
+        border: none;
+        color: #64748b;
+        font-size: 18px;
+        cursor: pointer;
+        padding: 4px;
+        transition: color 0.2s;
+    }
+
+    .vote-btn:hover {
+        color: #38bdf8;
+    }
+
+    .vote-count {
+        color: #94a3b8;
+        font-size: 12px;
+        font-weight: 600;
+        margin: 2px 0;
+    }
+
+    .post-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .post-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 8px;
+        font-size: 0.85rem;
+        align-items: center;
+    }
+
+    .post-tag {
+        background: rgba(59, 130, 246, 0.15);
+        color: #60a5fa;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+    }
+
+    .post-author {
+        color: #cbd5e1;
+    }
+
+    .post-author::before {
+        content: "Posted by ";
+    }
+
+    .post-location {
+        color: #94a3b8;
+    }
+
+    .post-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #f1f5f9;
+        margin: 8px 0;
+    }
+
+    .post-body {
+        color: #cbd5e1;
+        margin: 10px 0;
+        line-height: 1.5;
+    }
+
+    .post-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 10px;
+    }
+
+    .action-btn {
+        background: none;
+        border: none;
+        color: #64748b;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: color 0.2s;
+    }
+
+    .action-btn:hover {
+        color: #38bdf8;
+    }
+
+    /* Right Sidebar */
+    .reddit-sidebar {
+        width: 320px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 100px;
+        height: fit-content;
+    }
+
+    .sidebar-section {
+        background: #111827;
+        border: 1px solid rgba(148, 163, 184, 0.12);
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar-section h4 {
+        margin: 0 0 12px 0;
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #38bdf8;
+    }
+
+    .sidebar-section p {
+        color: #cbd5e1;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin: 0 0 12px 0;
+    }
+
+    .sidebar-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin: 12px 0;
+        padding: 12px 0;
+        border-top: 1px solid rgba(148, 163, 184, 0.12);
+        border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .stat {
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #f1f5f9;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+        color: #64748b;
+        margin-top: 4px;
+    }
+
+    .sidebar-date,
+    .sidebar-privacy {
+        color: #94a3b8;
+        font-size: 0.85rem;
+        margin: 4px 0;
+    }
+
+    .create-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .create-form input,
+    .create-form textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        background: #0b1220;
+        color: #e2e8f0;
+        font-size: 0.9rem;
+    }
+
+    .create-form textarea {
+        min-height: 80px;
+        resize: vertical;
+    }
+
+    @media (max-width: 768px) {
+        .reddit-container {
+            flex-direction: column;
+        }
+
+        .reddit-sidebar {
+            width: 100%;
+            position: relative;
+            top: auto;
+        }
+
+        .feed-header-content {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .feed-actions {
+            width: 100%;
+        }
+
+        .feed-btn {
+            flex: 1;
+        }
     }

@@ -1,111 +1,24 @@
 [
     {
-        "id": "post_traffic_1",
-        "author": "Anonymous",
-        "author_email": "",
-        "location": "Dagupan \u2013 Barangay 4",
-        "topic": "traffic",
-        "tags": [
-            "roads",
-            "drainage"
-        ],
-        "title": "Flooding Problem Last Night",
-        "body": "Street near the market was flooded again after the rain. We need drainage repairs.",
-        "created_at": "2025-01-10 08:10:00",
-        "replies": [
-            {
-                "id": "reply_a",
-                "parent_id": null,
-                "author": "Jose",
-                "author_email": "",
-                "body": "LGU said they will send a crew this week. Anyone saw them?",
-                "created_at": "2025-01-10 09:05:00"
-            },
-            {
-                "id": "reply_b",
-                "parent_id": "reply_a",
-                "author": "Lea",
-                "author_email": "",
-                "body": "Not yet. Maybe we can log a formal request at the barangay hall.",
-                "created_at": "2025-01-10 11:20:00"
-            }
-        ]
-    },
-    {
-        "id": "post_pets_1",
-        "author": "Maria",
-        "author_email": "maria@example.com",
-        "location": "Calasiao \u2013 Poblacion East",
-        "topic": "pets",
-        "tags": [
-            "rescue",
-            "adoption"
-        ],
-        "title": "Stray Puppy Needs a Home",
-        "body": "A small brown puppy has been wandering near our store. Anyone interested in adopting?",
-        "created_at": "2025-01-09 14:32:00",
-        "replies": [
-            {
-                "id": "reply_c",
-                "parent_id": null,
-                "author": "Vet Clinic",
-                "author_email": "",
-                "body": "We can check the puppy for vaccines. Please drop by.",
-                "created_at": "2025-01-09 15:00:00"
-            },
-            {
-                "id": "reply_5998b22b",
-                "parent_id": null,
-                "author": "lj",
-                "author_email": "Lj@gmail.com",
-                "body": "May I see their photos?",
-                "created_at": "2025-12-08 13:30:26"
-            },
-            {
-                "id": "reply_bd9428c7",
-                "parent_id": "reply_5998b22b",
-                "author": "lj",
-                "author_email": "Lj@gmail.com",
-                "body": "Hell nah bruh",
-                "created_at": "2025-12-08 13:30:41"
-            }
-        ]
-    },
-    {
-        "id": "post_env_1",
-        "author": "Carlo",
-        "author_email": "",
-        "location": "Dagupan \u2013 Mayombo",
-        "topic": "environment",
-        "tags": [
-            "waste",
-            "barangay"
-        ],
-        "title": "Uncollected Garbage for 2 Days",
-        "body": "Garbage truck hasn\u2019t arrived again. Residents are complaining about the smell.",
-        "created_at": "2025-01-08 07:10:00",
-        "replies": []
-    },
-    {
-        "id": "post_general_1",
+        "id": "post_f980f812",
         "author": "LJ",
         "author_email": "lj@gmail.com",
-        "location": "Lingayen \u2013 Downtown",
-        "topic": "general",
+        "location": "Dagupan City",
+        "topic": "traffic",
         "tags": [
-            "events"
+            "traffic #dagupan"
         ],
-        "title": "Community Cleanup This Weekend",
-        "body": "Who can help on Saturday morning? We will meet at the plaza and cover nearby streets.",
-        "created_at": "2025-01-07 10:00:00",
+        "title": "Traffic in Dagupan",
+        "body": "What's the use of all those traffic lights, are they only for display?",
+        "created_at": "2025-12-10 14:46:30",
         "replies": [
             {
-                "id": "reply_d",
+                "id": "reply_fb4f7580",
                 "parent_id": null,
-                "author": "Kim",
-                "author_email": "",
-                "body": "Count me in. I can bring gloves and trash bags.",
-                "created_at": "2025-01-07 11:00:00"
+                "author": "lj",
+                "author_email": "Lj@gmail.com",
+                "body": "I don't know anymore if they have any plans to resolve the unending traffic or not -_-",
+                "created_at": "2025-12-10 14:48:12"
             }
         ]
     }

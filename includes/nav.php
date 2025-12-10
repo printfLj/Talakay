@@ -18,7 +18,7 @@
     <nav class="nav-links">
         <a class="<?= $isActive('index.php') ?>" href="/index.php">Home</a>
         <a class="<?= $isActive('community.php') ?>" href="/community.php">Communities</a>
-        <a class="<?= $isActive('major_projects.php') ?>" href="/major_projects.php">Major Projects</a>
+        <a class="<?= $isActive('popular_today.php') ?>" href="/popular_today.php">Popular Today</a>
         <a class="<?= $isActive('profile.php') ?>" href="/profile.php">Friends & Profile</a>
         <?php if (isset($_SESSION['user']) && is_array($_SESSION['user'])): ?>
             <div class="profile-links">
