@@ -116,28 +116,28 @@
 
     <section class="cards">
         <article class="card">
-            <div class="card-media" style="background-image:url('assets/animal_hub.jpg');"></div>
+            <div class="card-media" style="background-image:url('../assets/Dagupan_pfp.png');"></div>
             <div class="card-body">
-                <h3>Stray Pets</h3>
-                <p>Keep up-to-date with lost and found pets, adoption leads, and vet resources across Pangasinan.</p>
-                <a href="rooms/pets.php">Enter room →</a>
+                <h3>Dagupan City Community</h3>
+                <p>Stay updated on city happenings—from market news and traffic updates to local programs and events. Connect with fellow Dagupenos.</p>
+                <a href="../feeds/dagupan.php">Enter room →</a>
             </div>
         </article>
 
         <article class="card">
-            <div class="card-media" style="background-image:url('assets/environment.jpg');"></div>
+            <div class="card-media" style="background-image:url('../assets/calasiao_pfp.jpg');"></div>
             <div class="card-body">
-                <h3>Environment</h3>
-                <p>Track cleanups, waste collection, and local climate efforts. Join neighbors making streets cleaner.</p>
+                <h3>Calasiao Community</h3>
+                <p>Discover neighborhood updates, town activities, business openings, and community services. Stay connected with life in Calasiao.</p>
                 <a href="rooms/environment.php">Enter room →</a>
             </div>
         </article>
 
         <article class="card">
-            <div class="card-media" style="background-image:url('assets/traffic.jfif');"></div>
+            <div class="card-media" style="background-image:url('../assets/lingayen_pfp.jpg');"></div>
             <div class="card-body">
-                <h3>Traffic & Roads</h3>
-                <p>Road work, drainage fixes, and jeepney reroutes. Share updates before you head out.</p>
+                <h3>Lingayen Community</h3>
+                <p>Get notified on coastal updates, civic events, cultural activities, and local services. Be part of the vibrant Lingayen community.</p>
                 <a href="rooms/traffic.php">Enter room →</a>
             </div>
         </article>
