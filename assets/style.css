@@ -966,6 +966,174 @@
         background: #2d3748;
     }
 
+    /* Edit Post Form Styles */
+    .edit-post-form {
+        background: rgba(15, 23, 42, 0.7);
+        border: 2px solid rgba(56, 189, 248, 0.3);
+        border-radius: 8px;
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    .edit-post-form form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .edit-post-form input[type="text"],
+    .edit-post-form textarea,
+    .edit-post-form select {
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        background: #0b1220;
+        color: #e2e8f0;
+        font-family: inherit;
+        font-size: 0.95rem;
+    }
+
+    .edit-post-form textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .edit-post-form input[type="text"]:focus,
+    .edit-post-form textarea:focus,
+    .edit-post-form select:focus {
+        outline: none;
+        border-color: #38bdf8;
+        box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.1);
+    }
+
+    .edit-form-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 8px;
+    }
+
+    .edit-save-btn {
+        background: #10b981;
+        color: #0b1220;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-size: 0.9rem;
+    }
+
+    .edit-save-btn:hover {
+        background: #34d399;
+    }
+
+    .edit-cancel-btn {
+        background: #6b7280;
+        color: #e2e8f0;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-size: 0.9rem;
+    }
+
+    .edit-cancel-btn:hover {
+        background: #9ca3af;
+    }
+
+    /* Edit Reply Form Styles */
+    .edit-reply-form {
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        border-radius: 6px;
+        padding: 12px;
+        margin-top: 10px;
+    }
+
+    .edit-reply-form textarea {
+        width: 100%;
+        min-height: 80px;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        background: #0b1220;
+        color: #e2e8f0;
+        font-family: inherit;
+        resize: vertical;
+        margin-bottom: 10px;
+    }
+
+    .edit-reply-form textarea:focus {
+        outline: none;
+        border-color: #38bdf8;
+        box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.1);
+    }
+
+    .edit-reply-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .edit-reply-save-btn {
+        background: #10b981;
+        color: #0b1220;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-size: 0.9rem;
+    }
+
+    .edit-reply-save-btn:hover {
+        background: #34d399;
+    }
+
+    .edit-reply-cancel-btn {
+        background: #6b7280;
+        color: #e2e8f0;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-size: 0.9rem;
+    }
+
+    .edit-reply-cancel-btn:hover {
+        background: #9ca3af;
+    }
+
+    /* Edited timestamp styles */
+    .post-edited-note,
+    .reply-edited-note {
+        font-size: 0.75rem;
+        color: #64748b;
+        margin-top: 6px;
+        font-style: italic;
+    }
+
+    .edit-btn {
+        color: #f59e0b !important;
+    }
+
+    .edit-btn:hover {
+        background: rgba(245, 158, 11, 0.1) !important;
+        color: #fbbf24 !important;
+    }
+
+    .reply-action-btn.edit {
+        color: #f59e0b;
+    }
+
+    .reply-action-btn.edit:hover {
+        background: rgba(245, 158, 11, 0.1);
+        color: #fbbf24;
+    }
+
     .reply-form-container {
         margin-top: 12px;
         border-top: 1px solid rgba(148, 163, 184, 0.08);
