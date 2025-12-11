@@ -6,13 +6,30 @@ class SocialGraph
 {
     private string $friendsFile;
     private string $messagesFile;
+    private string $usersFile;
 
     public function __construct(
         string $friendsFile = __DIR__ . '/../data/friends.json',
-        string $messagesFile = __DIR__ . '/../data/messages.json'
+        string $messagesFile = __DIR__ . '/../data/messages.json',
+        string $usersFile = __DIR__ . '/../data/users.json'
     ) {
         $this->friendsFile = $friendsFile;
         $this->messagesFile = $messagesFile;
+        $this->usersFile = $usersFile;
+    }
+
+    /**
+     * Check if a user email exists in the users database
+     */
+    private function userExists(string $email): bool
+    {
+        $users = load_json($this->usersFile, []);
+        foreach ($users as $user) {
+            if ($user['email'] === $email) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function getFriends(string $email): array
@@ -21,10 +38,20 @@ class SocialGraph
         return $all[$email]['friends'] ?? [];
     }
 
+    /**
+     * Add a friend - only if the friend email exists as a registered user
+     * Returns: true if successful, false if user doesn't exist or same email
+     */
     public function addFriend(string $userEmail, string $friendEmail): bool
     {
+        // Prevent adding yourself
         if ($userEmail === $friendEmail) {
             return false;
+        }
+
+        // Check if the friend email exists in the users database
+        if (!$this->userExists($friendEmail)) {
+            return false;  // Friend email doesn't exist as a registered user
         }
 
         $all = load_json($this->friendsFile, []);
