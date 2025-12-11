@@ -33,25 +33,22 @@ Prerequisites:
 - PHP 7.4+ installed
 - A modern web browser
 
-Start a local PHP server from the project root (PowerShell example):
+Start a local PHP server:
 
 ```powershell
 cd 'C:\Users\lance\Talakay 2.0\Talakay'
 php -S localhost:8000
 ```
 
-Then open http://localhost:8000/ in your browser.
+Open http://localhost:8000/ in your browser.
 
-Notes:
-- Ensure the `data/` directory is writable by the webserver/PHP process (the app writes to `data/posts.json`, `data/users.json`, etc.).
-- If you deploy behind Apache or Nginx, place the project in your document root or configure a virtual host.
+Ensure the `data/` directory is writable by PHP.
 
-## Installation (Production-ish)
+## Installation (Production)
 
 1. Place the project files on a PHP-enabled web server.
 2. Ensure `data/` is writable by PHP (e.g., `chmod 775 data` on Linux).
 3. Point your webserver to the project root or use a virtual host.
-4. (Optional) Configure HTTPS and server-side caching as needed.
 
 ## How to Use
 
@@ -86,18 +83,17 @@ If you need to seed or edit data manually, edit `data/posts.json` carefully and 
 
 ## Contributing
 
-You're welcome to contribute. Typical contributions:
+Contributions welcome. Typical improvements:
+- Bug fixes and UI enhancements
+- Database backend (SQLite, MySQL)
+- Tests and CI/CD configuration
 
-- Bug fixes and UI improvements
-- Replacing JSON storage with a database backend (e.g., SQLite, MySQL)
-- Add tests or CI configuration
-
-Please open an issue describing the change and submit a pull request.
+Please open an issue and submit a pull request.
 
 ## License
 
-Add a license file if you intend to open-source this project (e.g., MIT). Currently no license is included.
+No license included. Add one (e.g., MIT) if open-sourcing this project.
 
-## Contact / Maintainer
+## Contact
 
-Project maintained by the repository owner. For questions, open an issue in the repository.
+For questions or issues, open an issue in the repository.

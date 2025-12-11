@@ -1,10 +1,9 @@
 <?php
 
 require_once 'includes/init.php';
+require 'User.php';
 
-require "User.php";
 $user = new User();
-
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

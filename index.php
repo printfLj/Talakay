@@ -1,12 +1,7 @@
     <?php 
-        require_once 'includes/init.php';
-
-        // make the homepage public; read session user if present
-        $user = null;
-        if (isset($_SESSION['user'])) {
-            $user = $_SESSION["user"];
-        }
-    ?>
+    require_once 'includes/init.php';
+    $user = $_SESSION['user'] ?? null;
+?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
