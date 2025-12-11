@@ -69,7 +69,7 @@
         <!-- RIGHT: SIDEBAR -->
         <div class="reddit-sidebar">
             <div class="sidebar-section">
-                <h4>About t/Dagupan</h4>
+                <h4>About Dagupan</h4>
                 <p>Discover the latest news, events, and stories from the bustling city nestled along the western coast of Luzon. Share your favorite spots, culinary delights, and experiences with fellow Dagupenos and visitors.</p>
                 <div class="sidebar-stats">
                     <div class="stat">

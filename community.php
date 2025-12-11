@@ -79,6 +79,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
+// Handle post editing
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'edit_post') {
+    if (!$user) {
+        header('Location: login.php');
+        exit;
+    }
+    $postId = $_POST['post_id'] ?? '';
+    $title = trim($_POST['title'] ?? '');
+    $body = trim($_POST['body'] ?? '');
+    $topic = $_POST['topic'] ?? 'general';
+    $tags = $_POST['tags'] ?? '';
+    $location = $_POST['location'] ?? '';
+
+    if ($title !== '' && $body !== '') {
+        if ($repo->editPost($postId, [
+            'title' => $title,
+            'body' => $body,
+            'topic' => $topic,
+            'tags' => $tags,
+            'location' => $location,
+        ], $user['email'])) {
+            header('Location: community.php?edited=1');
+            exit;
+        } else {
+            header('Location: community.php?error=1');
+            exit;
+        }
+    }
+}
+
+// Handle reply editing
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'edit_reply') {
+    if (!$user) {
+        header('Location: login.php');
+        exit;
+    }
+    $postId = $_POST['post_id'] ?? '';
+    $replyId = $_POST['reply_id'] ?? '';
+    $body = trim($_POST['body'] ?? '');
+
+    if ($postId && $replyId && $body !== '') {
+        if ($repo->editReply($postId, $replyId, $body, $user['email'])) {
+            header('Location: community.php?edited=1');
+            exit;
+        } else {
+            header('Location: community.php?error=1');
+            exit;
+        }
+    }
+}
+
 $query = $_GET['q'] ?? null;
 $tag = $_GET['tag'] ?? null;
 $topic = $_GET['topic'] ?? null;
@@ -134,6 +185,7 @@ function render_replies(array $replies, ?string $parentId = null, ?array $curren
     echo '<ul class="reply-list" style="margin-left: ' . ($depth * 20) . 'px;">';
     foreach ($children as $reply) {
         $formId = 'reply-form-' . htmlspecialchars($reply['id']);
+        $editFormId = 'edit-reply-form-' . htmlspecialchars($reply['id']);
         ?>
         <li class="reply">
             <div class="reply-header">
@@ -142,6 +194,7 @@ function render_replies(array $replies, ?string $parentId = null, ?array $curren
                 <div class="reply-actions">
                     <button class="reply-action-btn" onclick="document.getElementById('<?= $formId ?>').style.display = document.getElementById('<?= $formId ?>').style.display === 'none' ? 'block' : 'none';" title="Reply to this comment">↩️ Reply</button>
                     <?php if ($currentUser && $currentUser['email'] === $reply['author_email']): ?>
+                        <button class="reply-action-btn edit" onclick="document.getElementById('<?= $editFormId ?>').style.display = document.getElementById('<?= $editFormId ?>').style.display === 'none' ? 'block' : 'none';" title="Edit reply">✏️ Edit</button>
                         <form method="post" style="display:inline;">
                             <input type="hidden" name="action" value="delete_reply">
                             <input type="hidden" name="post_id" value="<?= htmlspecialchars($postId ?? '') ?>">
@@ -152,6 +205,24 @@ function render_replies(array $replies, ?string $parentId = null, ?array $curren
                 </div>
             </div>
             <p class="reply-body"><?= nl2br(htmlspecialchars($reply['body'] ?? '')) ?></p>
+            <?php if (!empty($reply['edited_at'])): ?>
+                <p class="reply-edited-note">Edited: <?= htmlspecialchars($reply['edited_at']) ?></p>
+            <?php endif; ?>
+            
+            <?php if ($currentUser && $currentUser['email'] === $reply['author_email']): ?>
+                <div id="<?= $editFormId ?>" class="edit-reply-form" style="display:none;">
+                    <form method="post">
+                        <input type="hidden" name="action" value="edit_reply">
+                        <input type="hidden" name="post_id" value="<?= htmlspecialchars($postId ?? '') ?>">
+                        <input type="hidden" name="reply_id" value="<?= htmlspecialchars($reply['id']) ?>">
+                        <textarea name="body" placeholder="Edit your reply..." required><?= htmlspecialchars($reply['body'] ?? '') ?></textarea>
+                        <div class="edit-reply-actions">
+                            <button type="submit" class="edit-reply-save-btn">Save</button>
+                            <button type="button" class="edit-reply-cancel-btn" onclick="document.getElementById('<?= $editFormId ?>').style.display = 'none';">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            <?php endif; ?>
             
             <div id="<?= $formId ?>" class="nested-reply-form" style="display:none;">
                 <form method="post">
@@ -352,6 +423,7 @@ function render_replies(array $replies, ?string $parentId = null, ?array $curren
                                     </button>
                                     <button class="action-btn share-btn">📤 Share</button>
                                     <?php if ($user && $user['email'] === $post['author_email']): ?>
+                                        <button class="action-btn edit-btn" onclick="document.getElementById('edit-form-<?= htmlspecialchars($post['id']) ?>').style.display = document.getElementById('edit-form-<?= htmlspecialchars($post['id']) ?>').style.display === 'none' ? 'block' : 'none';">✏️ Edit</button>
                                         <form method="post" style="display:inline;">
                                             <input type="hidden" name="action" value="delete_post">
                                             <input type="hidden" name="post_id" value="<?= htmlspecialchars($post['id']) ?>">
@@ -359,6 +431,32 @@ function render_replies(array $replies, ?string $parentId = null, ?array $curren
                                         </form>
                                     <?php endif; ?>
                                 </div>
+
+                                <?php if ($user && $user['email'] === $post['author_email']): ?>
+                                    <div id="edit-form-<?= htmlspecialchars($post['id']) ?>" class="edit-post-form" style="display:none;">
+                                        <form method="post">
+                                            <input type="hidden" name="action" value="edit_post">
+                                            <input type="hidden" name="post_id" value="<?= htmlspecialchars($post['id']) ?>">
+                                            <input type="text" name="title" value="<?= htmlspecialchars($post['title'] ?? '') ?>" placeholder="Post title" required>
+                                            <textarea name="body" placeholder="What's on your mind?" required><?= htmlspecialchars($post['body'] ?? '') ?></textarea>
+                                            <input type="text" name="location" placeholder="Location (barangay, municipality)" value="<?= htmlspecialchars($post['location'] ?? '') ?>">
+                                            <select name="topic">
+                                                <option value="">Select a topic</option>
+                                                <?php foreach ($topics as $key => $label): ?>
+                                                    <option value="<?= $key ?>" <?= ($post['topic'] ?? '') === $key ? 'selected' : '' ?>><?= htmlspecialchars($label) ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <input type="text" name="tags" placeholder="Tags (comma separated)" value="<?= htmlspecialchars(implode(', ', $post['tags'] ?? [])) ?>">
+                                            <div class="edit-form-actions">
+                                                <button type="submit" class="edit-save-btn">Save Changes</button>
+                                                <button type="button" class="edit-cancel-btn" onclick="document.getElementById('edit-form-<?= htmlspecialchars($post['id']) ?>').style.display = 'none';">Cancel</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if (!empty($post['edited_at'])): ?>
+                                    <p class="post-edited-note">Edited: <?= htmlspecialchars($post['edited_at']) ?></p>
+                                <?php endif; ?>
 
                             <?php if (!empty($post['replies'])): ?>
                                 <div class="replies-section">

@@ -125,6 +125,59 @@ class PostRepository
         return false; // Post or reply not found
     }
 
+    public function editPost(string $postId, array $data, ?string $userEmail = null): bool
+    {
+        $posts = $this->all();
+        foreach ($posts as &$post) {
+            if ($post['id'] === $postId) {
+                // Only allow editing if userEmail matches the post author
+                if ($userEmail !== null && $post['author_email'] !== $userEmail) {
+                    return false;
+                }
+                // Update post fields
+                if (isset($data['title'])) {
+                    $post['title'] = trim($data['title']);
+                }
+                if (isset($data['body'])) {
+                    $post['body'] = trim($data['body']);
+                }
+                if (isset($data['topic'])) {
+                    $post['topic'] = $data['topic'];
+                }
+                if (isset($data['location'])) {
+                    $post['location'] = trim($data['location']);
+                }
+                if (isset($data['tags'])) {
+                    $post['tags'] = $this->normalizeTags($data['tags']);
+                }
+                $post['edited_at'] = date('Y-m-d H:i:s');
+                return save_json($this->file, $posts);
+            }
+        }
+        return false; // Post not found
+    }
+
+    public function editReply(string $postId, string $replyId, string $body, ?string $userEmail = null): bool
+    {
+        $posts = $this->all();
+        foreach ($posts as &$post) {
+            if ($post['id'] === $postId) {
+                foreach ($post['replies'] as &$reply) {
+                    if ($reply['id'] === $replyId) {
+                        // Only allow editing if userEmail matches the reply author
+                        if ($userEmail !== null && $reply['author_email'] !== $userEmail) {
+                            return false;
+                        }
+                        $reply['body'] = trim($body);
+                        $reply['edited_at'] = date('Y-m-d H:i:s');
+                        return save_json($this->file, $posts);
+                    }
+                }
+            }
+        }
+        return false; // Post or reply not found
+    }
+
     private function normalizeTags($tags): array
     {
         if (is_string($tags)) {
