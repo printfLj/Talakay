@@ -19,6 +19,14 @@
                 "author_email": "Lj@gmail.com",
                 "body": "I don't know anymore if they have any plans to resolve the unending traffic or not -_-",
                 "created_at": "2025-12-10 14:48:12"
+            },
+            {
+                "id": "reply_8cc143a1",
+                "parent_id": "reply_fb4f7580",
+                "author": "LJ",
+                "author_email": "lj@gmail.com",
+                "body": "hope they fix it soon tho.",
+                "created_at": "2025-12-11 12:34:36"
             }
         ]
     },
@@ -34,7 +42,16 @@
         "title": "Lost Puppy Found Near Arellano St., Dagupan City",
         "body": "We found a lost puppy just beside nepo mall in Arellano. If anyone wants to adopt the puppy, just contact us!",
         "created_at": "2025-12-10 23:03:46",
-        "replies": []
+        "replies": [
+            {
+                "id": "reply_80b07f6b",
+                "parent_id": null,
+                "author": "LJ",
+                "author_email": "lj@gmail.com",
+                "body": "Anyone still interested?",
+                "created_at": "2025-12-11 12:32:26"
+            }
+        ]
     },
     {
         "id": "post_e6d2d55f",

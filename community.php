@@ -46,12 +46,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
+// Handle post deletion
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete_post') {
+    if (!$user) {
+        header('Location: login.php');
+        exit;
+    }
+    $postId = $_POST['post_id'] ?? '';
+    if ($postId && $repo->deletePost($postId, $user['email'])) {
+        header('Location: community.php?deleted=1');
+        exit;
+    } else {
+        header('Location: community.php?error=1');
+        exit;
+    }
+}
+
+// Handle reply deletion
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete_reply') {
+    if (!$user) {
+        header('Location: login.php');
+        exit;
+    }
+    $postId = $_POST['post_id'] ?? '';
+    $replyId = $_POST['reply_id'] ?? '';
+    if ($postId && $replyId && $repo->deleteReply($postId, $replyId, $user['email'])) {
+        header('Location: community.php?deleted=1');
+        exit;
+    } else {
+        header('Location: community.php?error=1');
+        exit;
+    }
+}
+
 $query = $_GET['q'] ?? null;
 $tag = $_GET['tag'] ?? null;
 $topic = $_GET['topic'] ?? null;
 $posts = $repo->search($query, $tag, $topic);
 
-// Discover tab handling (integrated into community): trending, foryou, topics, local
 $discoverTab = $_GET['tab'] ?? 'trending';
 $renderTopicsView = false;
 if ($discoverTab === 'trending') {
@@ -60,37 +92,26 @@ if ($discoverTab === 'trending') {
     });
 } elseif ($discoverTab === 'foryou') {
     if ($user) {
-        $userLocation = $user['location'] ?? null;
-        $userEmail = $user['email'] ?? null;
-        $filtered = array_filter($posts, function ($p) use ($userLocation, $userEmail) {
-            if (!empty($p['author_email']) && $p['author_email'] === $userEmail) return true;
-            if ($userLocation && !empty($p['location']) && stripos($p['location'], $userLocation) !== false) return true;
+        $filtered = array_filter($posts, function ($p) use ($user) {
+            if (!empty($p['author_email']) && $p['author_email'] === $user['email']) return true;
+            if (!empty($user['location']) && !empty($p['location']) && stripos($p['location'], $user['location']) !== false) return true;
             return false;
         });
         if (!empty($filtered)) {
             $posts = array_values($filtered);
         } else {
-            usort($posts, function ($a, $b) {
-                return count($b['replies'] ?? []) <=> count($a['replies'] ?? []);
-            });
+            usort($posts, fn($a, $b) => count($b['replies'] ?? []) <=> count($a['replies'] ?? []));
         }
     } else {
-        usort($posts, function ($a, $b) {
-            return count($b['replies'] ?? []) <=> count($a['replies'] ?? []);
-        });
+        usort($posts, fn($a, $b) => count($b['replies'] ?? []) <=> count($a['replies'] ?? []));
     }
 } elseif ($discoverTab === 'topics') {
     $renderTopicsView = true;
 } elseif ($discoverTab === 'local') {
     if ($user && !empty($user['location'])) {
-        $loc = $user['location'];
-        $posts = array_values(array_filter($posts, function ($p) use ($loc) {
-            return !empty($p['location']) && stripos($p['location'], $loc) !== false;
-        }));
+        $posts = array_values(array_filter($posts, fn($p) => !empty($p['location']) && stripos($p['location'], $user['location']) !== false));
     } else {
-        usort($posts, function ($a, $b) {
-            return (empty($b['location']) ? 0 : 1) <=> (empty($a['location']) ? 0 : 1);
-        });
+        usort($posts, fn($a, $b) => (empty($b['location']) ? 0 : 1) <=> (empty($a['location']) ? 0 : 1));
     }
 }
 
@@ -104,29 +125,48 @@ $topics = [
     'health' => 'Health & Wellness',
 ];
 
-function render_replies(array $replies, ?string $parentId = null): void
+function render_replies(array $replies, ?string $parentId = null, ?array $currentUser = null, ?string $postId = null, int $depth = 0): void
 {
     $children = array_values(array_filter($replies, fn($r) => ($r['parent_id'] ?? null) === $parentId));
     if (empty($children)) {
         return;
     }
-    echo '<ul class="reply-list">';
+    echo '<ul class="reply-list" style="margin-left: ' . ($depth * 20) . 'px;">';
     foreach ($children as $reply) {
+        $formId = 'reply-form-' . htmlspecialchars($reply['id']);
         ?>
         <li class="reply">
             <div class="reply-header">
-                <span class="author"><?= htmlspecialchars($reply['author'] ?? 'Neighbor') ?></span>
+                <span class="author">👤 <?= htmlspecialchars($reply['author'] ?? 'Neighbor') ?></span>
                 <span class="timestamp"><?= htmlspecialchars($reply['created_at'] ?? '') ?></span>
+                <div class="reply-actions">
+                    <button class="reply-action-btn" onclick="document.getElementById('<?= $formId ?>').style.display = document.getElementById('<?= $formId ?>').style.display === 'none' ? 'block' : 'none';" title="Reply to this comment">↩️ Reply</button>
+                    <?php if ($currentUser && $currentUser['email'] === $reply['author_email']): ?>
+                        <form method="post" style="display:inline;">
+                            <input type="hidden" name="action" value="delete_reply">
+                            <input type="hidden" name="post_id" value="<?= htmlspecialchars($postId ?? '') ?>">
+                            <input type="hidden" name="reply_id" value="<?= htmlspecialchars($reply['id']) ?>">
+                            <button type="submit" class="reply-action-btn delete" onclick="return confirm('Delete this reply?');" title="Delete reply">🗑️ Delete</button>
+                        </form>
+                    <?php endif; ?>
+                </div>
             </div>
-            <p><?= nl2br(htmlspecialchars($reply['body'] ?? '')) ?></p>
-            <form method="post" class="inline-form">
-                <input type="hidden" name="action" value="reply">
-                <input type="hidden" name="post_id" value="<?= htmlspecialchars($reply['post_id'] ?? '') ?>">
-                <input type="hidden" name="parent_id" value="<?= htmlspecialchars($reply['id']) ?>">
-                <textarea name="reply_body" placeholder="Reply to this comment" required></textarea>
-                <button type="submit">Reply</button>
-            </form>
-            <?php render_replies($replies, $reply['id']); ?>
+            <p class="reply-body"><?= nl2br(htmlspecialchars($reply['body'] ?? '')) ?></p>
+            
+            <div id="<?= $formId ?>" class="nested-reply-form" style="display:none;">
+                <form method="post">
+                    <input type="hidden" name="action" value="reply">
+                    <input type="hidden" name="post_id" value="<?= htmlspecialchars($postId ?? '') ?>">
+                    <input type="hidden" name="parent_id" value="<?= htmlspecialchars($reply['id']) ?>">
+                    <textarea name="reply_body" placeholder="Write your reply..." required></textarea>
+                    <div class="nested-form-actions">
+                        <button type="submit" class="nested-reply-btn">Post Reply</button>
+                        <button type="button" class="nested-cancel-btn" onclick="document.getElementById('<?= $formId ?>').style.display = 'none';">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            
+            <?php render_replies($replies, $reply['id'], $currentUser, $postId, $depth + 1); ?>
         </li>
         <?php
     }
@@ -134,8 +174,10 @@ function render_replies(array $replies, ?string $parentId = null): void
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talakay Community</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -256,7 +298,6 @@ function render_replies(array $replies, ?string $parentId = null): void
                     <button type="submit">Search</button>
                     </form>
                 </div>
-                </form>
             </div>
 
             <div class="posts-container">
@@ -310,6 +351,13 @@ function render_replies(array $replies, ?string $parentId = null): void
                                         💬 Comment
                                     </button>
                                     <button class="action-btn share-btn">📤 Share</button>
+                                    <?php if ($user && $user['email'] === $post['author_email']): ?>
+                                        <form method="post" style="display:inline;">
+                                            <input type="hidden" name="action" value="delete_post">
+                                            <input type="hidden" name="post_id" value="<?= htmlspecialchars($post['id']) ?>">
+                                            <button type="submit" class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this post?');">🗑️ Delete</button>
+                                        </form>
+                                    <?php endif; ?>
                                 </div>
 
                             <?php if (!empty($post['replies'])): ?>
@@ -322,7 +370,7 @@ function render_replies(array $replies, ?string $parentId = null): void
                                         $reply['post_id'] = $post['id'];
                                         return $reply;
                                     }, $post['replies']);
-                                    render_replies($replies);
+                                    render_replies($replies, null, $user, $post['id']);
                                     ?>
                                 </div>
                             <?php endif; ?>
@@ -351,7 +399,7 @@ function render_replies(array $replies, ?string $parentId = null): void
             btn.addEventListener('click', function() {
                 const postId = this.dataset.postId;
                 const form = document.getElementById('reply-' + postId);
-                form.style.display = form.style.display === 'none' ? 'block' : 'none';
+                if (form) form.style.display = form.style.display === 'none' ? 'block' : 'none';
             });
         });
     </script>

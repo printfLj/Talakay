@@ -88,6 +88,43 @@ class PostRepository
         return null;
     }
 
+    public function deletePost(string $postId, ?string $userEmail = null): bool
+    {
+        $posts = $this->all();
+        foreach ($posts as $index => $post) {
+            if ($post['id'] === $postId) {
+                // Only allow deletion if userEmail matches the post author or if no userEmail specified
+                if ($userEmail === null || $post['author_email'] === $userEmail) {
+                    unset($posts[$index]);
+                    return save_json($this->file, array_values($posts));
+                }
+                return false; // User does not own this post
+            }
+        }
+        return false; // Post not found
+    }
+
+    public function deleteReply(string $postId, string $replyId, ?string $userEmail = null): bool
+    {
+        $posts = $this->all();
+        foreach ($posts as &$post) {
+            if ($post['id'] === $postId) {
+                foreach ($post['replies'] as $index => $reply) {
+                    if ($reply['id'] === $replyId) {
+                        // Only allow deletion if userEmail matches the reply author or if no userEmail specified
+                        if ($userEmail === null || $reply['author_email'] === $userEmail) {
+                            unset($post['replies'][$index]);
+                            $post['replies'] = array_values($post['replies']);
+                            return save_json($this->file, $posts);
+                        }
+                        return false; // User does not own this reply
+                    }
+                }
+            }
+        }
+        return false; // Post or reply not found
+    }
+
     private function normalizeTags($tags): array
     {
         if (is_string($tags)) {

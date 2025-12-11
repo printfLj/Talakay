@@ -1,7 +1,4 @@
 <?php
-/**
- * Lightweight JSON storage helpers.
- */
 
 function load_json(string $path, $default = []) {
     if (!file_exists($path)) {
