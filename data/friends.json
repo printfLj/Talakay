@@ -7,12 +7,18 @@
     },
     "lj@gmail.com": {
         "friends": [
-            "Lj@gmail.com"
+            "Lj@gmail.com",
+            "testLance@gmail.com"
         ]
     },
     "lance@gmail.com": {
         "friends": [
             "Lj@gmail.com"
+        ]
+    },
+    "testLance@gmail.com": {
+        "friends": [
+            "lj@gmail.com"
         ]
     }
 }

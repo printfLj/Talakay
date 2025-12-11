@@ -21,5 +21,33 @@
                 "created_at": "2025-12-10 14:48:12"
             }
         ]
+    },
+    {
+        "id": "post_13e6f1bb",
+        "author": "LJ",
+        "author_email": "lj@gmail.com",
+        "location": "Dagupan City",
+        "topic": "pets",
+        "tags": [
+            "lostpuppy #straydogs"
+        ],
+        "title": "Lost Puppy Found Near Arellano St., Dagupan City",
+        "body": "We found a lost puppy just beside nepo mall in Arellano. If anyone wants to adopt the puppy, just contact us!",
+        "created_at": "2025-12-10 23:03:46",
+        "replies": []
+    },
+    {
+        "id": "post_e6d2d55f",
+        "author": "testLance",
+        "author_email": "testLance@gmail.com",
+        "location": "Dagupan",
+        "topic": "environment",
+        "tags": [
+            "xmas #december"
+        ],
+        "title": "Christmas season is really here!",
+        "body": "Is it just me, or dagupan is kinda having a slightly low temperature?",
+        "created_at": "2025-12-11 00:53:09",
+        "replies": []
     }
 ]
