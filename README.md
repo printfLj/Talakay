@@ -92,8 +92,8 @@ Please open an issue and submit a pull request.
 
 ## License
 
-No license included. Add one (e.g., MIT) if open-sourcing this project.
+No license included.
 
 ## Contact
 
-For questions or issues, open an issue in the repository.
+For questions or issues, contact this email: lancejoseph.devera9@gmail.com
